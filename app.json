@@ -1,11 +1,4 @@
 {
-  "expo": {
-    "name": "my-app-delta",
-    "slug": "my-app-delta",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  },
-  "name": "my-app-delta"
+  "name": "DeltaReactN",
+  "displayName": "DeltaReactN"
 }

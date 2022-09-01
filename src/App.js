@@ -1,21 +1,19 @@
-import { registerRootComponent } from 'expo';
 import React from "react";
-
 import { StyleSheet, Text, View } from "react-native";
 
-import ClientList from "./src/components/ClientList";
-import FormEquipment from "./src/components/FormEquipment";
+import ClientList from "./components/ClientList";
+import FormEquipment from "./components/FormEquipment";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ListEquipment from "./src/components/ListEquipment";
+import ListEquipment from "./components/ListEquipment";
 
-import FiltroComponent from "./src/components/FiltroComponent";
-import FiltroComponentByID from "./src/components/FiltroComponentByID";
+import FiltroComponent from "./components/FiltroComponent";
+import FiltroComponentByID from "./components/FiltroComponentByID";
 
-import FiltroComponentDataEntrada from "./src/components/FiltroComponentDataEntrada";
-import ClientListByDataEntrada from "./src/components/ClientListByDataEntrada";
-import ClientListByDataEntrega from "./src/components/ClientListByDataEntrega";
-import FiltroComponentDataEntrega from "./src/components/FiltroComponentDataEntrega";
+import FiltroComponentDataEntrada from "./components/FiltroComponentDataEntrada";
+import ClientListByDataEntrada from "./components/ClientListByDataEntrada";
+import ClientListByDataEntrega from "./components/ClientListByDataEntrega";
+import FiltroComponentDataEntrega from "./components/FiltroComponentDataEntrega";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -90,4 +88,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-registerRootComponent(App);
+export default App;
