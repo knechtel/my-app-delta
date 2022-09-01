@@ -265,7 +265,7 @@ const FormEquipment = ({ route, navigate }) => {
         <TextInput
           style={styles.input}
           editable={!entregue}
-          placeholder="Nome"
+          placeholder="     Nome"
           value={name}
           onChangeText={(name) => setName(name)}
           defaultValue={name}
@@ -274,7 +274,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={telefone}
-          placeholder="Telefone"
+          placeholder="     Telefone"
           onChangeText={(telefone) => setTelefone(telefone)}
           defaultValue={telefone}
         />
@@ -282,7 +282,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={endereco}
-          placeholder="Endereço"
+          placeholder="     Endereço"
           onChangeText={(endereco) => setEndereco(endereco)}
           defaultValue={endereco}
         />
@@ -290,7 +290,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={email}
-          placeholder="Email"
+          placeholder="     Email"
           onChangeText={(email) => setEmail(email)}
           defaultValue={email}
         />
@@ -298,7 +298,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={cpf}
-          placeholder="Cpf"
+          placeholder="     Cpf"
           onChangeText={(cpf) => setCpf(cpf)}
           defaultValue={cpf}
         />
@@ -306,7 +306,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={brand}
-          placeholder="Marca"
+          placeholder="     Marca"
           onChangeText={(newBrand) => setBrand(newBrand)}
           defaultValue={brand}
         />
@@ -314,16 +314,17 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={equipamento}
-          placeholder="Equipamento"
+          placeholder="     Equipamento"
           onChangeText={(equipamento) => setEquipamento(equipamento)}
           defaultValue={equipamento}
         />
         <CurrencyInput
           editable={!entregue}
+          style={styles.input}
           value={preco}
           onChangeValue={setPreco}
-          placeholder="Preço"
-          prefix="$"
+          placeholder="     Preço"
+          prefix="R$"
           delimiter=","
           separator="."
           precision={2}
@@ -335,7 +336,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={defect_for_repair}
-          placeholder="Defeito"
+          placeholder="     Defeito"
           onChangeText={(defect_for_repair) => setDefeito(defect_for_repair)}
           defaultValue={defect_for_repair}
         />
@@ -343,7 +344,7 @@ const FormEquipment = ({ route, navigate }) => {
           editable={!entregue}
           style={styles.input}
           value={obs}
-          placeholder="obs"
+          placeholder="      Obs"
           onChangeText={(obs) => setObs(obs)}
           defaultValue={obs}
         />
@@ -411,7 +412,9 @@ const styles1 = StyleSheet.create({
     margin: 8,
   },
   input: {
-    margin: 8,
+    margin: 16,
+    fontFamily: "diplomata",
+    fontWeight: "bold",
   },
 });
 
