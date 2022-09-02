@@ -1,6 +1,6 @@
 export const PADRAO = "http://1da5-177-74-122-85.ngrok.io";
 export const LOCAL = "http://10.0.0.199:5000";
-var BASE = "http://c509-177-74-122-85.sa.ngrok.io";
+var BASE = "http://df3f-177-74-122-85.sa.ngrok.io";
 export var CREATE_CLIENT = BASE + "/api/client-findAll";
 export var FIND_BY_ID_CLIENT = BASE + `/api/client-findById`;
 export var FIND_ALL_EQUIPMENT_BY_CLIENT = `http://1da5-177-74-122-85.sa.ngrok.io/api/client-findByAllEquipment`;
