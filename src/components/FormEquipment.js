@@ -413,7 +413,7 @@ const styles1 = StyleSheet.create({
   },
   input: {
     margin: 16,
-    fontFamily: "diplomata",
+    fontFamily: "Roboto bold italic",
     fontWeight: "bold",
   },
 });
