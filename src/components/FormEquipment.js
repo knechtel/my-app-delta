@@ -7,17 +7,20 @@ import {
   Alert,
   Linking,
 } from "react-native";
+
 import { Button, ScrollView } from "react-native";
 import CheckBox from "@react-native-community/checkbox";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-
+import { launchImageLibrary } from "react-native-image-picker";
+import RNFetchBlob from "rn-fetch-blob";
 import {
   CREATE_CLIENT,
   CREATE_EQUIPMENT,
   FIND_BY_ID_CLIENT,
   FIND_EQUIPMENT_BY_CLIENT,
   LOAD_IAMAGE,
+  SAVE_IMAGE,
   UPDATE_CLIENT,
   UPLOAD_IAMAGE,
 } from "../util/urls";
@@ -31,6 +34,7 @@ import ListEquipment from "./ListEquipment";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
 const FormEquipment = ({ route, navigate }) => {
+  const [photo, setPhoto] = React.useState(null);
   const [value, setValue] = React.useState(2310.458);
   console.log(route.params.paramKey);
   const [name, setName] = React.useState();
@@ -49,7 +53,88 @@ const FormEquipment = ({ route, navigate }) => {
   const [pronto, setPronto] = React.useState(false);
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
+  const [uri, setUri] = React.useState();
+  // const createFormData = (photo, body = {}) => {
+  //   const data = new FormData();
 
+  //   data.append("photo", {
+  //     name: photo.fileName,
+  //     type: photo.type,
+  //     uri: photo.uri,
+  //   });
+  //   // Object.keys(body).forEach((key) => {
+  //   //   data.append(key, body[key]);
+  //   // });
+
+  //   return data;
+  // };
+  const handleChoosePhoto = async () => {
+    launchImageLibrary({ noData: true }, (response) => {
+      console.log("passei aqui aqui aqui passei");
+      console.log(response);
+      console.log(response.assets[0].uri);
+      setUri(response.assets[0].uri);
+      if (response) {
+        setPhoto(response);
+      }
+    });
+  };
+  const handleUploadPhoto = async () => {
+    // axios
+    //   .post(`http://10.0.0.199/test`, {
+    //     method: "POST",
+    //     body: createFormData(photo, { userId: "123" }),
+    //   })
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //     console.log("response", response);
+    //   })
+    //   .catch((error) => {
+    //     console.log("error", error);
+    //   });createFormData(photo, { userId: "123" }
+    await axios.get(SAVE_IMAGE + "?id=" + "" + id).then(function (response) {
+      console.log(response);
+    });
+    console.log(uri);
+    RNFetchBlob.fetch(
+      "POST",
+      SAVE_IMAGE,
+      {
+        "Content-Type": "application/octet-stream",
+      },
+
+      RNFetchBlob.wrap(uri)
+    ).then((res) => {
+      console.log(res.text());
+    });
+    alert("Foto salva!");
+    //   .then((RetrivedData) => {
+    //     console.log("---retrieved data------", RetrivedData);
+    //     Toast.show({
+    //       text1: "Success",
+    //       text2: "Vehicle Added to Garage!",
+    //       type: "success",
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log("----Error in adding a comment----", err);
+    //     Toast.show({
+    //       text1: "Request Failed",
+    //       text2: err?.response?.data?.message,
+    //       type: "error",
+    //     });
+    //   });
+    // console.log("Ver aqui !!");
+    // console.log(uri);
+    // await axios({
+    //   method: "post",
+    //   url: `http://10.0.0.199:5000/doApi`,
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   data: { anexo: uri },
+    // }).then((response1) => {});
+  };
   const [edit, setEdit] = React.useState(false);
   const savePhoto = () => {
     Linking.canOpenURL(UPLOAD_IAMAGE + id).then((supported) => {
@@ -61,14 +146,25 @@ const FormEquipment = ({ route, navigate }) => {
     });
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
-  const loadPhoto = () => {
-    Linking.canOpenURL(LOAD_IAMAGE + id + ".jpeg").then((supported) => {
+  const loadPhoto = async () => {
+    Linking.canOpenURL(LOAD_IAMAGE + "?id=" + id).then((supported) => {
       if (supported) {
-        Linking.openURL(LOAD_IAMAGE + id + ".jpeg");
+        Linking.openURL(LOAD_IAMAGE + "?id=" + id);
       } else {
         console.log("Don't know how to open URI: ");
       }
     });
+
+    // await axios.get(LOAD_IAMAGE + "?id=" + "" + id).then(function (response) {
+    //   console.log(response);
+    // });
+    // Linking.canOpenURL(LOAD_IAMAGE + "?id=" + id).then((supported) => {
+    //   if (supported) {
+    //     Linking.openURL(LOAD_IAMAGE + "?id=" + id);
+    //   } else {
+    //     console.log("Don't know how to open URI: ");
+    //   }
+    // });
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const setProntoValue = () => {
@@ -373,8 +469,15 @@ const FormEquipment = ({ route, navigate }) => {
           <Button
             style={stylesButton}
             title="Salvar Foto"
-            onPress={savePhoto}
+            onPress={handleUploadPhoto}
           />
+          <View style={{ marginVertical: 10 }}>
+            <Button
+              style={stylesButton}
+              title="Escolher Foto"
+              onPress={handleChoosePhoto}
+            />
+          </View>
           <View style={{ marginVertical: 10 }}>
             <Button
               style={stylesButton}
@@ -386,7 +489,7 @@ const FormEquipment = ({ route, navigate }) => {
       </ScrollView>
     </>
   );
-};
+};;;;;;;;
 
 const stylesButton = StyleSheet.create({
   button: {
