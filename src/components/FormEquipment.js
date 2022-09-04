@@ -33,6 +33,8 @@ import {
 import ListEquipment from "./ListEquipment";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
+import * as Progress from "react-native-progress";
+import ProgressBar from "react-native-progress/Bar";
 const FormEquipment = ({ route, navigate }) => {
   const [photo, setPhoto] = React.useState(null);
   const [value, setValue] = React.useState(2310.458);
@@ -54,6 +56,7 @@ const FormEquipment = ({ route, navigate }) => {
   const [autorizado, setAutorizado] = React.useState(false);
   const [entregue, setEntregue] = React.useState(false);
   const [uri, setUri] = React.useState();
+  const [actBar, setActBar] = React.useState(false);
   // const createFormData = (photo, body = {}) => {
   //   const data = new FormData();
 
@@ -80,18 +83,7 @@ const FormEquipment = ({ route, navigate }) => {
     });
   };
   const handleUploadPhoto = async () => {
-    // axios
-    //   .post(`http://10.0.0.199/test`, {
-    //     method: "POST",
-    //     body: createFormData(photo, { userId: "123" }),
-    //   })
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     console.log("response", response);
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error);
-    //   });createFormData(photo, { userId: "123" }
+    setActBar(true);
     await axios.get(SAVE_IMAGE + "?id=" + "" + id).then(function (response) {
       console.log(response);
     });
@@ -107,33 +99,8 @@ const FormEquipment = ({ route, navigate }) => {
     ).then((res) => {
       console.log(res.text());
     });
-    alert("Foto salva!");
-    //   .then((RetrivedData) => {
-    //     console.log("---retrieved data------", RetrivedData);
-    //     Toast.show({
-    //       text1: "Success",
-    //       text2: "Vehicle Added to Garage!",
-    //       type: "success",
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log("----Error in adding a comment----", err);
-    //     Toast.show({
-    //       text1: "Request Failed",
-    //       text2: err?.response?.data?.message,
-    //       type: "error",
-    //     });
-    //   });
-    // console.log("Ver aqui !!");
-    // console.log(uri);
-    // await axios({
-    //   method: "post",
-    //   url: `http://10.0.0.199:5000/doApi`,
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   data: { anexo: uri },
-    // }).then((response1) => {});
+    setActBar(false);
+    alert("Foto enviada ao servidor com sucesso!");
   };
   const [edit, setEdit] = React.useState(false);
   const savePhoto = () => {
@@ -147,25 +114,26 @@ const FormEquipment = ({ route, navigate }) => {
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const loadPhoto = async () => {
-    Linking.canOpenURL(LOAD_IAMAGE + "?id=" + id).then((supported) => {
-      if (supported) {
-        Linking.openURL(LOAD_IAMAGE + "?id=" + id);
-      } else {
-        console.log("Don't know how to open URI: ");
-      }
-    });
-
-    // await axios.get(LOAD_IAMAGE + "?id=" + "" + id).then(function (response) {
-    //   console.log(response);
-    // });
-    // Linking.canOpenURL(LOAD_IAMAGE + "?id=" + id).then((supported) => {
-    //   if (supported) {
-    //     Linking.openURL(LOAD_IAMAGE + "?id=" + id);
-    //   } else {
-    //     console.log("Don't know how to open URI: ");
-    //   }
-    // });
-    // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
+    setActBar(true);
+    const { config, fs } = RNFetchBlob;
+    let PictureDir = fs.dirs.PictureDir; // this is the pictures directory. You can check the available directories in the wiki.
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
+        notification: true,
+        path: PictureDir + "os.jpeg", // this is the path where your downloaded file will live in
+        description: "Downloading image.",
+      },
+    };
+    await config(options)
+      .fetch("GET", LOAD_IAMAGE + "?id=" + id)
+      .then((res) => {
+        console.log(res);
+        // do some magic here
+      });
+    setActBar(false);
+    alert("Arquivo baixado ao servidor com sucesso!");
   };
   const setProntoValue = () => {
     setPronto(true);
@@ -357,6 +325,14 @@ const FormEquipment = ({ route, navigate }) => {
   };
   return (
     <>
+      {actBar && (
+        <Progress.Bar
+          progress={0.3}
+          width={500}
+          animated={true}
+          indeterminate={true}
+        />
+      )}
       <ScrollView keyboardShouldPersistTaps="always">
         <TextInput
           style={styles.input}
