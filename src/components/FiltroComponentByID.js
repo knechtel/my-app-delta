@@ -1,19 +1,40 @@
 import React from 'react';
 import {StyleSheet, TextInput, View, Linking, Text} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import {Button, ScrollView} from 'react-native';
-import {PDF_BY_ID} from '../util/urls';
+import * as Progress from "react-native-progress";
+import { Button, ScrollView } from "react-native";
+import RNFetchBlob from "rn-fetch-blob";
+import { PDF_BY_ID } from "../util/urls";
 const FiltroComponentByID = ({ navigation }) => {
   const [id, setId] = React.useState();
   const [check, isCheck] = React.useState(false);
-  const handleClick = () => {
-    Linking.canOpenURL(PDF_BY_ID + id).then((supported) => {
-      if (supported) {
-        Linking.openURL(PDF_BY_ID + id);
-      } else {
-        console.log("Don't know how to open URI: ");
-      }
-    });
+  const [actBar, setActBar] = React.useState(false);
+  const handleClick = async () => {
+    setActBar(true);
+    const { config, fs } = RNFetchBlob;
+    let PictureDir = fs.dirs.PictureDir; // this is the pictures directory. You can check the available directories in the wiki.
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
+        notification: true,
+        path: PictureDir + "name.pdf", // this is the path where your downloaded file will live in
+        description: "Downloading image.",
+      },
+    };
+    await config(options)
+      .fetch("GET", PDF_BY_ID + id)
+      .then((res) => {
+        // do some magic here
+      });
+    setActBar(false);
+    // Linking.canOpenURL(PDF_BY_ID + id).then((supported) => {
+    //   if (supported) {
+    //     Linking.openURL(PDF_BY_ID + id);
+    //   } else {
+    //     console.log("Don't know how to open URI: ");
+    //   }
+    // });
   };
   const callId = () => {
     navigation.navigate("FormEquipment", { paramKey: id });
@@ -28,6 +49,14 @@ const FiltroComponentByID = ({ navigation }) => {
   };
   return (
     <>
+      {actBar && (
+        <Progress.Bar
+          progress={0.3}
+          width={400}
+          animated={true}
+          indeterminate={true}
+        />
+      )}
       <ScrollView keyboardShouldPersistTaps="always">
         <TextInput
           style={styles.input}
@@ -36,21 +65,21 @@ const FiltroComponentByID = ({ navigation }) => {
           onChangeText={(id) => setId(id)}
           defaultValue={id}
         />
-        <View style={styles1.checkboxContainer}>
-          <CheckBox
+        <View style={{ marginVertical: 10 }}>
+          <Button
+            title="Gera PDF"
             style={styles1.checkbox}
             value={check}
-            onValueChange={(value) => select(value)}
+            onPress={(value) => select(value)}
           />
-          <Text style={styles1.label}>Gerar PDF!</Text>
         </View>
         <View style={{ marginVertical: 10 }}>
-          <Button title="Enviar" onPress={() => callId()} />
+          <Button title="Editar" onPress={() => callId()} />
         </View>
       </ScrollView>
     </>
   );
-};
+};;
 
 const styles = StyleSheet.create({
   sectionContainer: {
