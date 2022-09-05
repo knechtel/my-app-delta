@@ -18,7 +18,7 @@ const FiltroComponentByID = ({ navigation }) => {
       addAndroidDownloads: {
         useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
         notification: true,
-        path: PictureDir + "name.pdf", // this is the path where your downloaded file will live in
+        path: RNFetchBlob.fs.dirs.DCIMDir + "/" + "os.pdf", // this is the path where your downloaded file will live in
         description: "Downloading image.",
       },
     };
