@@ -4,7 +4,7 @@
     <domain includeSubdomains="false">localhost</domain>
     <domain includeSubdomains="false">10.0.2.2</domain>
     <domain includeSubdomains="false">10.0.0.199</domain>
-    <domain includeSubdomains="false">1da5-177-74-122-85.sa.ngrok.io</domain>
+    <domain includeSubdomains="false">1d9c-177-74-122-85.ngrok.io</domain>
     <base-config cleartextTrafficPermitted="true"/>
   </domain-config>
 </network-security-config>

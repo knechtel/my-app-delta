@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, TextInput, View, Linking, Text} from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import { StyleSheet, TextInput, View } from "react-native";
 import * as Progress from "react-native-progress";
 import { Button, ScrollView } from "react-native";
 import RNFetchBlob from "rn-fetch-blob";
@@ -18,7 +17,7 @@ const FiltroComponentByID = ({ navigation }) => {
       addAndroidDownloads: {
         useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
         notification: true,
-        path: RNFetchBlob.fs.dirs.DCIMDir + "/" + "os.pdf", // this is the path where your downloaded file will live in
+        path: PictureDir + "/os.pdf", // this is the path where your downloaded file will live in
         description: "Downloading image.",
       },
     };

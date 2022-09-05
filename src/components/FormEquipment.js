@@ -34,7 +34,7 @@ import ListEquipment from "./ListEquipment";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
 import * as Progress from "react-native-progress";
-import ProgressBar from "react-native-progress/Bar";
+
 const FormEquipment = ({ route, navigate }) => {
   const [photo, setPhoto] = React.useState(null);
   const [value, setValue] = React.useState(2310.458);
