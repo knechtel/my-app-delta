@@ -11,11 +11,12 @@ import ListEquipment from "./src/components/ListEquipment";
 
 import FiltroComponent from "./src/components/FiltroComponent";
 import FiltroComponentByID from "./src/components/FiltroComponentByID";
-
+import FiltroComponentByName from "./src/components/FiltroComponentByName";
 import FiltroComponentDataEntrada from "./src/components/FiltroComponentDataEntrada";
 import ClientListByDataEntrada from "./src/components/ClientListByDataEntrada";
 import ClientListByDataEntrega from "./src/components/ClientListByDataEntrega";
 import FiltroComponentDataEntrega from "./src/components/FiltroComponentDataEntrega";
+import ClientListByName from "./src/components/ClientListByName";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -30,6 +31,12 @@ const App = () => {
             component={FiltroComponent}
             options={{ title: "Eletrônica Delta" }}
           />
+          <Stack.Screen
+            name="FiltroComponentByName"
+            component={FiltroComponentByName}
+            options={{ title: "Eletrônica Delta" }}
+          />
+
           <Stack.Screen
             name="filtroComponentByID"
             component={FiltroComponentByID}
@@ -69,6 +76,11 @@ const App = () => {
           <Stack.Screen
             name="FiltroComponentDataEntrada"
             component={FiltroComponentDataEntrada}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="ClientListByName"
+            component={ClientListByName}
             options={{ title: "Eletrônica Delta" }}
           />
           <Stack.Screen

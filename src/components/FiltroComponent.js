@@ -4,8 +4,8 @@ import {ScrollView, StyleSheet, Linking} from 'react-native';
 import {PDF_BY_ID, PHOTO_SERVIDOR} from '../util/urls';
 
 class FiltroComponent extends Component {
-  handleClick = id => {
-    Linking.canOpenURL(PDF_BY_ID + id).then(supported => {
+  handleClick = (id) => {
+    Linking.canOpenURL(PDF_BY_ID + id).then((supported) => {
       if (supported) {
         Linking.openURL(PDF_BY_ID + id);
       } else {
@@ -14,7 +14,7 @@ class FiltroComponent extends Component {
     });
   };
   photoServidor = () => {
-    Linking.canOpenURL(PHOTO_SERVIDOR).then(supported => {
+    Linking.canOpenURL(PHOTO_SERVIDOR).then((supported) => {
       if (supported) {
         Linking.openURL(PHOTO_SERVIDOR);
       } else {
@@ -23,62 +23,66 @@ class FiltroComponent extends Component {
     });
   };
   numeroOS = () => {
-    const {navigation} = this.props;
-    navigation.navigate('filtroComponentByID');
+    const { navigation } = this.props;
+    navigation.navigate("filtroComponentByID");
   };
   dataEntrada = () => {
-    const {navigation} = this.props;
-    navigation.navigate('FiltroComponentDataEntrada');
-    console.log('ola');
+    const { navigation } = this.props;
+    navigation.navigate("FiltroComponentDataEntrada");
+    console.log("ola");
   };
   dataEntrega = () => {
-    const {navigation} = this.props;
-    navigation.navigate('FiltroComponentDataEntrega');
+    const { navigation } = this.props;
+    navigation.navigate("FiltroComponentDataEntrega");
   };
   listClient = () => {
-    const {navigation} = this.props;
-    navigation.navigate('ClientList');
+    const { navigation } = this.props;
+    navigation.navigate("ClientList");
   };
   doNewClient = () => {
-    const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: 0}, navigation);
+    const { navigation } = this.props;
+    navigation.navigate("FormEquipment", { paramKey: 0 }, navigation);
+  };
+  filtroPorNome = () => {
+    const { navigation } = this.props;
+    navigation.navigate("FiltroComponentByName");
   };
   render() {
     return (
       <>
         <Text>Controle de ordem de serviço _</Text>
         <ScrollView>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button
               title="Cadastrar Cliente"
               onPress={() => this.doNewClient()}
             />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button title="All Clients" onPress={() => this.listClient()} />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button title="por numero de os " onPress={() => this.numeroOS()} />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button
               title="por data de entrada "
               onPress={() => this.dataEntrada()}
             />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button
               title="por data de Saída "
               onPress={() => this.dataEntrega()}
             />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button title="PDF" onPress={() => this.numeroOS()} />
           </View>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Button
-              title="Foto()+ Macbook"
-              onPress={() => this.photoServidor()}
+              title="Filtro por nome"
+              onPress={() => this.filtroPorNome()}
             />
           </View>
         </ScrollView>
