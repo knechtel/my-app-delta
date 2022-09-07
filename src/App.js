@@ -15,6 +15,7 @@ import ClientListByDataEntrada from "./components/ClientListByDataEntrada";
 import ClientListByDataEntrega from "./components/ClientListByDataEntrega";
 import FiltroComponentDataEntrega from "./components/FiltroComponentDataEntrega";
 import FiltroComponentByName from "./components/FiltroComponentByName";
+import FiltroChangeServer from "./components/FiltroChangeServer";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -32,6 +33,57 @@ const App = () => {
           <Stack.Screen
             name="filtroComponentByID"
             component={FiltroComponentByID}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="FiltroChangeServer"
+            component={FiltroChangeServer}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="FiltroComponentByName"
+            component={FiltroComponentByName}
+            options={{ title: "Eletrônica Delta" }}
+          />
+
+          <Stack.Screen
+            name="ClientList"
+            component={ClientList}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="FormEquipment"
+            component={FormEquipment}
+            options={{ title: "Cadastrar Equipamento" }}
+          />
+          <Stack.Screen
+            name="ListEquipment"
+            component={ListEquipment}
+            options={{ title: "Cadastrar Equipamento" }}
+          />
+          <Stack.Screen
+            name="FiltroComponetDataEntrada"
+            component={FiltroComponentDataEntrada}
+            options={{ title: "Cadastrar Equipamento" }}
+          />
+          <Stack.Screen
+            name="ClientListByDataEntrada"
+            component={ClientListByDataEntrada}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="ClientListByDataEntrega"
+            component={ClientListByDataEntrega}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="FiltroComponentDataEntrada"
+            component={FiltroComponentDataEntrada}
+            options={{ title: "Eletrônica Delta" }}
+          />
+          <Stack.Screen
+            name="FiltroComponentDataEntrega"
+            component={FiltroComponentDataEntrega}
             options={{ title: "Eletrônica Delta" }}
           />
         </Stack.Navigator>
