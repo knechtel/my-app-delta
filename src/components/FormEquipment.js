@@ -313,6 +313,7 @@ const FormEquipment = ({ route, navigate }) => {
           setPreco(0.0);
           setDefeito("");
           setEquipamento("");
+          setEndereco("");
           setObs("");
           setEntregue(false);
           setPronto(false);
