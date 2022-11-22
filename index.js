@@ -17,6 +17,7 @@ import ClientListByDataEntrada from "./src/components/ClientListByDataEntrada";
 import ClientListByDataEntrega from "./src/components/ClientListByDataEntrega";
 import FiltroComponentDataEntrega from "./src/components/FiltroComponentDataEntrega";
 import ClientListByName from "./src/components/ClientListByName";
+import LoginComponent from "./src/components/LoginComponent";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -26,6 +27,11 @@ const App = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="loginComponent"
+            component={LoginComponent}
+            options={{ title: "Eletrônica Delta" }}
+          />
           <Stack.Screen
             name="filtroComponent"
             component={FiltroComponent}
