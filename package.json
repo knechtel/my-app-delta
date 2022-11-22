@@ -22,10 +22,12 @@
     "react-native-currency-input": "^1.0.1",
     "react-native-gesture-handler": "*",
     "react-native-image-picker": "^4.10.0",
+    "react-native-login-screen": "^4.2.0",
     "react-native-progress": "^5.0.0",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "react-native-svg": "^13.1.0",
+    "react-native-text-input-interactive": "^0.1.4",
     "react-native-web": "~0.18.7",
     "rn-fetch-blob": "^0.12.0"
   },

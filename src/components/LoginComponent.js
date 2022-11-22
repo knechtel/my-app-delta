@@ -1,10 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import LoginScreen from "react-native-login-screen";
 const LoginComponent = () => {
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <LoginScreen
+      onLoginPress={() => {}}
+      onSignupPress={() => {}}
+      onEmailChange={(email) => {}}
+      onPasswordChange={(setPassword) => {}}
+    />
   );
 };
 const styles = StyleSheet.create({
