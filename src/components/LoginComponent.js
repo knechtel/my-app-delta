@@ -15,12 +15,10 @@ export default LoginComponent = () => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
-  const sendForm = () => {
-    console.log("Maiquel123");
-    console.log(email);
-    console.log(password);
-    login(email, password);
-  };
+  async function sendForm() {
+    var TOKEN = await login(email, password);
+    console.log(TOKEN);
+  }
   return (
     <>
       <View style={styles.container}>
@@ -57,7 +55,7 @@ export default LoginComponent = () => {
       </View>
     </>
   );
-};
+};;
 const styles = StyleSheet.create({
   container: {
     flex: 3,
