@@ -1,11 +1,12 @@
 import axios from "axios";
+import { LOGIN } from "../util/urls";
 
 export var TOKEN;
 async function login(email, password) {
   var token;
   await axios({
     method: "post",
-    url: "http://10.0.10.199:5000/login",
+    url: LOGIN,
     headers: {
       "Content-type": "application/json",
     },
@@ -15,7 +16,7 @@ async function login(email, password) {
     },
   }).then((response) => {
     //console.log(response.data);
-    test = response.data;
+    token = response.data;
   });
   return token["access_token"];
 }
