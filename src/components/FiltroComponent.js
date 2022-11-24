@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import {Text, View, Button} from 'react-native';
-import {ScrollView, StyleSheet, Linking} from 'react-native';
-import {PDF_BY_ID, PHOTO_SERVIDOR} from '../util/urls';
+import { ScrollView, StyleSheet, Linking } from "react-native";
+
+import { PDF_BY_ID, PHOTO_SERVIDOR } from "../util/urls";
 
 class FiltroComponent extends Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    console.log("componentDidMount = = local");
+
+    console.log("componentDidMount");
+  }
   handleClick = (id) => {
     Linking.canOpenURL(PDF_BY_ID + id).then((supported) => {
       if (supported) {
@@ -39,9 +48,21 @@ class FiltroComponent extends Component {
     const { navigation } = this.props;
     navigation.navigate("ClientList");
   };
-  doNewClient = () => {
+  doNewClient = async () => {
+    console.log("agora waint ");
+    console.log();
+    console.log("doNewClient");
+    console.log(this.props.route.params.access_token);
+    console.log("testa agora -->>");
+    console.log("componentDidMount");
+
+    console.log("componentDidMount");
     const { navigation } = this.props;
-    navigation.navigate("FormEquipment", { paramKey: 0 }, navigation);
+    navigation.navigate(
+      "FormEquipment",
+      { access_token: this.props.route.params.access_token },
+      navigation
+    );
   };
   filtroPorNome = () => {
     const { navigation } = this.props;
