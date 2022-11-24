@@ -1,7 +1,6 @@
 import axios from "axios";
 import { LOGIN } from "../util/urls";
 
-export var TOKEN;
 async function login(email, password) {
   var token;
   await axios({
