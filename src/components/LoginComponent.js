@@ -11,13 +11,17 @@ import {
 } from "react-native";
 
 import { login } from "../actions/loginApi";
-export default LoginComponent = () => {
+
+
+export default LoginComponent = ({ navigation }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
   async function sendForm() {
     var TOKEN = await login(email, password);
     console.log(TOKEN);
+
+    navigation.navigate("filtroComponent", { access_token: TOKEN });
   }
   return (
     <>
