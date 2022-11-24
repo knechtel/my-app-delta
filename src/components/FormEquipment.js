@@ -57,6 +57,9 @@ const FormEquipment = ({ route, navigate }) => {
   const [entregue, setEntregue] = React.useState(false);
   const [uri, setUri] = React.useState();
   const [actBar, setActBar] = React.useState(false);
+
+  console.log("Mais um test");
+  console.log(route.params.access_token);
   // const createFormData = (photo, body = {}) => {
   //   const data = new FormData();
 
