@@ -1,13 +1,19 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Progress from "react-native-progress";
+import { useState, useEffect } from "react";
+import { useRoute } from "@react-navigation/native";
 import { Button, ScrollView } from "react-native";
 import RNFetchBlob from "rn-fetch-blob";
 import { PDF_BY_ID } from "../util/urls";
-const FiltroComponentByID = ({ navigation }) => {
+const FiltroComponentByID = ({ route, navigation }) => {
   const [id, setId] = React.useState();
   const [check, isCheck] = React.useState(false);
   const [actBar, setActBar] = React.useState(false);
+
+  useEffect(() => {
+    console.log("teste>><<<>><<>>  123", route.params.access_token);
+  }, [route.params.access_token]);
   const handleClick = async () => {
     setActBar(true);
     const { config, fs } = RNFetchBlob;
