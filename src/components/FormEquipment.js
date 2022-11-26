@@ -290,7 +290,8 @@ const FormEquipment = ({ route, navigate }) => {
             email,
             cpf,
             telefone,
-            endereco
+            endereco,
+            route.params.access_token
           );
 
           if (typeof defect_for_repair === "undefined") {
