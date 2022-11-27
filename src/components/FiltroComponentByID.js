@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from "react-native";
 import * as Progress from "react-native-progress";
-import { useState, useEffect } from "react";
-import { useRoute } from "@react-navigation/native";
+import { useEffect } from "react";
+
 import { Button, ScrollView } from "react-native";
 import RNFetchBlob from "rn-fetch-blob";
 import { PDF_BY_ID } from "../util/urls";
@@ -33,13 +33,6 @@ const FiltroComponentByID = ({ route, navigation }) => {
         // do some magic here
       });
     setActBar(false);
-    // Linking.canOpenURL(PDF_BY_ID + id).then((supported) => {
-    //   if (supported) {
-    //     Linking.openURL(PDF_BY_ID + id);
-    //   } else {
-    //     console.log("Don't know how to open URI: ");
-    //   }
-    // });
   };
   const callId = () => {
     navigation.navigate("FormEquipment", { paramKey: id });
