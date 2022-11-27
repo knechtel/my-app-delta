@@ -42,7 +42,9 @@ class FiltroComponent extends Component {
   };
   dataEntrega = () => {
     const { navigation } = this.props;
-    navigation.navigate("FiltroComponentDataEntrega");
+    navigation.navigate("FiltroComponentDataEntrega", {
+      access_token: this.props.route.params.access_token,
+    });
   };
   listClient = () => {
     const { navigation } = this.props;
