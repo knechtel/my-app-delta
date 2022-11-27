@@ -5,13 +5,15 @@ import {
   UPDATE_EQUIPMENT,
 } from '../util/urls';
 import axios from 'axios';
-async function createNewClient(name, email, cpf, telefone, endereco) {
+import { TouchableNativeFeedbackComponent } from "react-native";
+async function createNewClient(name, email, cpf, telefone, endereco, token) {
   var idClient;
   await axios({
-    method: 'post',
+    method: "post",
     url: CREATE_CLIENT,
     headers: {
-      'Content-type': 'application/json',
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     data: {
       name: name,
@@ -20,10 +22,11 @@ async function createNewClient(name, email, cpf, telefone, endereco) {
       telefone: telefone,
       endereco: endereco,
     },
-  }).then(response => {
+  }).then((response) => {
     idClient = response.data.id;
   });
-
+  console.log("maiquel knechtel lessa");
+  console.log(token);
   return idClient;
 }
 
