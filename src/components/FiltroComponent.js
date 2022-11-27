@@ -8,11 +8,7 @@ class FiltroComponent extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    console.log("componentDidMount = = local");
-
-    console.log("componentDidMount");
-  }
+  componentDidMount() {}
   handleClick = (id) => {
     Linking.canOpenURL(PDF_BY_ID + id).then((supported) => {
       if (supported) {
@@ -33,7 +29,9 @@ class FiltroComponent extends Component {
   };
   numeroOS = () => {
     const { navigation } = this.props;
-    navigation.navigate("filtroComponentByID");
+    navigation.navigate("filtroComponentByID", {
+      access_token: this.props.route.params.access_token,
+    });
   };
   dataEntrada = () => {
     const { navigation } = this.props;
@@ -49,14 +47,6 @@ class FiltroComponent extends Component {
     navigation.navigate("ClientList");
   };
   doNewClient = async () => {
-    console.log("agora waint ");
-    console.log();
-    console.log("doNewClient");
-    console.log(this.props.route.params.access_token);
-    console.log("testa agora -->>");
-    console.log("componentDidMount");
-
-    console.log("componentDidMount");
     const { navigation } = this.props;
     navigation.navigate(
       "FormEquipment",
