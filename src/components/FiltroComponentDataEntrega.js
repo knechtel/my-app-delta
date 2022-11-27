@@ -21,17 +21,19 @@ import {
 import ListEquipment from './ListEquipment';
 import {useEffect} from 'react';
 
-const FiltroComponentDataEntrega = () => {
+const FiltroComponentDataEntrega = ({ route }) => {
   const [id, setId] = React.useState();
   const navigation = useNavigation();
 
-  const callId = id => {
-    console.log('eu');
+  const callId = (id) => {
+    console.log("eu");
     console.log(id);
 
-    navigation.navigate('ClientListByDataEntrega', {data_entrega: id});
+    navigation.navigate("ClientListByDataEntrega", { data_entrega: id });
   };
-
+  useEffect(() => {
+    console.log("mais um test 123 321" + route.params.access_token);
+  }, [route.params.access_token]);
   return (
     <>
       <ScrollView keyboardShouldPersistTaps="always">
@@ -39,11 +41,11 @@ const FiltroComponentDataEntrega = () => {
           style={styles.input}
           value={id}
           placeholder="Data de Saída"
-          onChangeText={id => setId(id)}
+          onChangeText={(id) => setId(id)}
           defaultValue={id}
         />
 
-        <View style={{marginVertical: 10}}>
+        <View style={{ marginVertical: 10 }}>
           <Button title="Enviar" onPress={() => callId(id)} />
         </View>
       </ScrollView>
