@@ -30,7 +30,6 @@ import {
   updateCliente,
   updateEquipment,
 } from "../actions/callApi";
-import ListEquipment from "./ListEquipment";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
 import * as Progress from "react-native-progress";
@@ -58,22 +57,6 @@ const FormEquipment = ({ route, navigate }) => {
   const [uri, setUri] = React.useState();
   const [actBar, setActBar] = React.useState(false);
 
-  console.log("Mais um test");
-  console.log(route.params.access_token);
-  // const createFormData = (photo, body = {}) => {
-  //   const data = new FormData();
-
-  //   data.append("photo", {
-  //     name: photo.fileName,
-  //     type: photo.type,
-  //     uri: photo.uri,
-  //   });
-  //   // Object.keys(body).forEach((key) => {
-  //   //   data.append(key, body[key]);
-  //   // });
-
-  //   return data;
-  // };
   const handleChoosePhoto = async () => {
     launchImageLibrary({ noData: true }, (response) => {
       console.log("passei aqui aqui aqui passei");
@@ -202,11 +185,10 @@ const FormEquipment = ({ route, navigate }) => {
   };
 
   useEffect(() => {
-    console.log("I have been mounted  -- " + route.params.paramKey);
     if (route.params.paramKey != 0 && route.params.paramKey != null)
       findClient(route.params.paramKey);
   }, [route.params.paramKey]);
-  // findClient(route.params.paramKey);
+
   const createClient = async () => {
     var idClient = id;
     var aparelhoEntregue = null;
@@ -215,13 +197,11 @@ const FormEquipment = ({ route, navigate }) => {
       d.getTime();
       aparelhoEntregue = d.toISOString().substring(0, 10);
     }
-    console.log("este é o id --> " + id);
+
     //if com opcao de edicao
     if (id !== null && id !== 0 && typeof id !== "undefined") {
       idClient = await updateCliente(id, name, email, cpf, telefone, endereco);
-      console.log("valor de pronto ------- ");
-      console.log(pronto);
-      console.log("valor de id ---- " + id);
+
       if (idEquipment !== null && idEquipment !== 0) {
         //TODO CRIA EQUIPAMENTO SE NAO TEM
         await updateEquipment(
@@ -239,7 +219,6 @@ const FormEquipment = ({ route, navigate }) => {
       //se nao cria cliente
       if (typeof cpf === "undefined" || cpf === "") {
         setCpf("cpf nao definido");
-        console.log("Entrou aquiiiii ...");
       } else {
         setCpf(cpf);
       }
@@ -250,23 +229,16 @@ const FormEquipment = ({ route, navigate }) => {
         setEmail(email);
       }
       if (typeof telefone === "undefined" || telefone === "") {
-        console.log("Entrou aquiiiii ...");
         setTelefone("telefone nao definido");
       } else {
         setTelefone(telefone);
       }
       if (typeof endereco === "undefined" || endereco === "") {
-        console.log("Entrou aquiiiii ...");
         setEndereco("Endereco nao definido");
       } else {
         setEndereco(endereco);
       }
-      console.log("telefone ===  " + telefone);
-      console.log("MMMMMMMMMMM");
-      console.log(defect_for_repair);
 
-      console.log("cpf ======  ");
-      console.log(cpf);
       if (
         brand !== "" &&
         brand !== null &&
@@ -470,7 +442,7 @@ const FormEquipment = ({ route, navigate }) => {
       </ScrollView>
     </>
   );
-};;;;;;;;
+};
 
 const stylesButton = StyleSheet.create({
   button: {
