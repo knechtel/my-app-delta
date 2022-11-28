@@ -9,11 +9,7 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
-import {
-  FIND_ALL_CLIENT,
-  EQUIPMENT_FIND_DATA_ENTRADA,
-  FIND_BY_ID_CLIENT,
-} from '../util/urls';
+import { EQUIPMENT_FIND_DATA_ENTRADA, FIND_BY_ID_CLIENT } from "../util/urls";
 
 class ClientListByDataEntrada extends Component {
   constructor(props) {
@@ -25,16 +21,16 @@ class ClientListByDataEntrada extends Component {
   }
 
   redirectToHome = () => {
-    const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: 0}, navigation);
+    const { navigation } = this.props;
+    navigation.navigate("FormEquipment", { paramKey: 0 }, navigation);
   };
-  redirectToEdit = id => {
-    const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: id});
+  redirectToEdit = (id) => {
+    const { navigation } = this.props;
+    navigation.navigate("FormEquipment", { paramKey: id });
   };
   _onRefresh = () => {
     var listClient = [];
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     // axios({
     //   method: 'post',
     //   url: EQUIPMENT_FIND_DATA_ENTRADA,
@@ -68,55 +64,51 @@ class ClientListByDataEntrada extends Component {
     //   }
     // });
     // this.setState({client: listClient});
-    this.setState({refreshing: false});
+    this.setState({ refreshing: false });
   };
 
   componentDidMount() {
-    console.log('I have been mounted');
-
-    console.log('componentDidMount1234');
-    console.log('componentDidMount');
     var listClient = [];
-    console.log('valor = ' + this.props.route.params.data_entrada);
+    console.log("valor = " + this.props.route.params.data_entrada);
 
     axios({
-      method: 'post',
+      method: "post",
       url: EQUIPMENT_FIND_DATA_ENTRADA,
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
-      data: {data_entrada: this.props.route.params.data_entrada},
-    }).then(response1 => {
+      data: { data_entrada: this.props.route.params.data_entrada },
+    }).then((response1) => {
       //doIt(response.data.id, response.data.name);
-      console.log('response1  -  ');
+      console.log("response1  -  ");
       console.log(response1.data);
-      console.log('foi');
+      console.log("foi");
       for (let i = 0; i < response1.data.length; i++) {
         console.log(response1.data[i].client_id);
-        console.log('end');
+        console.log("end");
 
         axios({
-          method: 'post',
+          method: "post",
           url: FIND_BY_ID_CLIENT,
           headers: {
-            'Content-type': 'application/json',
+            "Content-type": "application/json",
           },
-          data: {id: Number(response1.data[i].client_id)},
-        }).then(response => {
+          data: { id: Number(response1.data[i].client_id) },
+        }).then((response) => {
           console.log(response.data);
-          var clientOne = {id: response.data.id, name: response.data.name};
+          var clientOne = { id: response.data.id, name: response.data.name };
           // eslint-disable-next-line react-hooks/exhaustive-deps
           listClient.push(clientOne);
           //doIt(response.data.id, response.data.name);
         });
       }
     });
-    this.setState({client: listClient});
-    console.log('minha lista');
+    this.setState({ client: listClient });
+    console.log("minha lista");
   }
-  alertItemName = item => {
+  alertItemName = (item) => {
     alert(item.name);
-    this.setState({refreshing: false});
+    this.setState({ refreshing: false });
     this.redirectToEdit(item.id);
   };
   render() {
@@ -128,14 +120,16 @@ class ClientListByDataEntrada extends Component {
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}
             />
-          }>
+          }
+        >
           {this.state.client.map((item, index) => (
             <TouchableOpacity
               key={item.id}
               style={styles.container}
-              onPress={() => this.alertItemName(item)}>
+              onPress={() => this.alertItemName(item)}
+            >
               <Text style={styles.text}>
-                {item.name} - {item.id}{' '}
+                {item.name} - {item.id}{" "}
               </Text>
             </TouchableOpacity>
           ))}
