@@ -31,39 +31,7 @@ class ClientListByDataEntrada extends Component {
   _onRefresh = () => {
     var listClient = [];
     this.setState({ refreshing: true });
-    // axios({
-    //   method: 'post',
-    //   url: EQUIPMENT_FIND_DATA_ENTRADA,
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //   },
-    //   data: {data_entrada: this.props.route.params.data_entrada},
-    // }).then(response1 => {
-    //   //doIt(response.data.id, response.data.name);
-    //   console.log('response1  -  ');
-    //   console.log(response1.data);
-    //   console.log('foi');
-    //   for (let i = 0; i < response1.data.length; i++) {
-    //     console.log(response1.data[i].client_id);
-    //     console.log('end');
 
-    //     axios({
-    //       method: 'post',
-    //       url: FIND_BY_ID_CLIENT,
-    //       headers: {
-    //         'Content-type': 'application/json',
-    //       },
-    //       data: {id: Number(response1.data[i].client_id)},
-    //     }).then(response => {
-    //       console.log(response.data);
-    //       var clientOne = {id: response.data.id, name: response.data.name};
-    //       // eslint-disable-next-line react-hooks/exhaustive-deps
-    //       listClient.push(clientOne);
-    //       //doIt(response.data.id, response.data.name);
-    //     });
-    //   }
-    // });
-    // this.setState({client: listClient});
     this.setState({ refreshing: false });
   };
 
