@@ -130,10 +130,12 @@ const FormEquipment = ({ route, navigate }) => {
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async (id) => {
+    console.log("puxa token " + route.params.access_token);
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${route.params.access_token}`,
       },
       body: JSON.stringify({
         id: id,
@@ -154,6 +156,7 @@ const FormEquipment = ({ route, navigate }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${route.params.access_token}`,
         },
         body: JSON.stringify({
           id: id,
