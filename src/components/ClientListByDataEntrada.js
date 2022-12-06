@@ -26,12 +26,15 @@ class ClientListByDataEntrada extends Component {
   };
   redirectToEdit = (id) => {
     const { navigation } = this.props;
-    navigation.navigate("FormEquipment", { paramKey: id });
+    navigation.navigate("FormEquipment", {
+      paramKey: id,
+      access_token: this.props.route.params.access_token,
+    });
   };
   _onRefresh = () => {
     var listClient = [];
     this.setState({ refreshing: true });
-
+    console.log("token load cliente ");
     this.setState({ refreshing: false });
   };
 
