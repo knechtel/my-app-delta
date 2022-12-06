@@ -29,9 +29,14 @@ const FiltroComponentDataEntrada = ({ route }) => {
     console.log("eu");
     console.log(id);
 
-    navigation.navigate("ClientListByDataEntrada", { data_entrada: id });
+    navigation.navigate("ClientListByDataEntrada", {
+      data_entrada: id,
+      access_token: route.params.access_token,
+    });
   };
-  useEffect(() => {}, [route.params.access_token]);
+  useEffect(() => {
+    console.log("FiltroComponent data entrada " + route.params.access_token);
+  }, [route.params.access_token]);
   return (
     <>
       <ScrollView keyboardShouldPersistTaps="always">
