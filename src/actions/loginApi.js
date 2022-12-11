@@ -3,23 +3,9 @@ import { LOGIN, REFRESH } from "../util/urls";
 
 const login = async (email, password) => {
   var token;
-  // fetch(LOGIN, {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     email: email,
-  //     password: password,
-  //   }),
-  // }).then((response) => {
-  //   token = response.data;
-  //   console.log(token)
-  // });
+
 
   try {
-    console.log("Inside function login");
     await axios({
       method: "POST",
       url: LOGIN,
@@ -36,9 +22,8 @@ const login = async (email, password) => {
       token = response.data;
     });
   } catch (err) {
-    console.log(err);
+    
     if (err.response.status == 405) {
-      console.log("entrou aqui ...");
       await axios({
         method: "GET",
         url: REFRESH,
