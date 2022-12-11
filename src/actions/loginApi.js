@@ -1,9 +1,8 @@
 import axios from "axios";
 import { LOGIN, REFRESH } from "../util/urls";
-
+let SUCCESS = "Login successed!";
 const login = async (email, password) => {
   var token;
-
 
   try {
     await axios({
@@ -22,7 +21,6 @@ const login = async (email, password) => {
       token = response.data;
     });
   } catch (err) {
-    
     if (err.response.status == 405) {
       await axios({
         method: "GET",
@@ -35,15 +33,17 @@ const login = async (email, password) => {
         },
         data: JSON.stringify({ email: email, password: password }),
       }).then((response) => {
-        console.log("mais um teste! ");
-        console.log(response.data);
         token = response.data;
       });
     }
     throw new Error("Unable to get a token.");
   }
 
-  return token["access_token"];
+  if (token["message"] === SUCCESS) {
+    return token["access_token"];
+  } else {
+    return null;
+  }
 };
 
 export { login };
