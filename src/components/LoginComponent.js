@@ -17,12 +17,15 @@ export default LoginComponent = ({ navigation }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
-  async function sendForm() {
+  const sendForm = async () => {
+    console.log("Olha para ca!!!");
     var TOKEN = await login(email, password);
     console.log(TOKEN);
-
-    navigation.navigate("filtroComponent", { access_token: TOKEN });
-  }
+    if (TOKEN != null) {
+      navigation.navigate("filtroComponent", { access_token: TOKEN });
+    } else {
+    }
+  };
   return (
     <>
       <View style={styles.container}>
