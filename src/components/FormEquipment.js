@@ -29,9 +29,8 @@ import {
 } from "../actions/callApi";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
-import * as Progress from "react-native-progress";
 
-const FormEquipment = ({ route, navigate }) => {
+const FormEquipment = ({ route, navigation }) => {
   const [photo, setPhoto] = React.useState(null);
   const [value, setValue] = React.useState(2310.458);
   console.log(route.params.paramKey);
@@ -45,7 +44,7 @@ const FormEquipment = ({ route, navigate }) => {
   const [obs, setObs] = React.useState();
   const [preco, setPreco] = React.useState();
   const [defect_for_repair, setDefeito] = React.useState();
-  const navigation = useNavigation();
+
   const [equipamento, setEquipamento] = React.useState();
   const [brand, setBrand] = React.useState();
   const [pronto, setPronto] = React.useState(false);
@@ -141,6 +140,10 @@ const FormEquipment = ({ route, navigate }) => {
         id: id,
       }),
     });
+    if (response.status == 401 || response.status == 405) {
+      console.log("status = >", response.status);
+      navigation.navigate("loginComponent");
+    }
 
     const json = await response.json();
 
@@ -162,7 +165,10 @@ const FormEquipment = ({ route, navigate }) => {
           id: id,
         }),
       });
-
+      if (responseT.status == 401 || responseT.status == 405) {
+        console.log("status = >" + response.status);
+        navigation.navigate("loginComponent");
+      }
       const jsonEquipment = await responseT.json();
       console.log("puxa equipamento " + jsonEquipment.id);
       if (typeof jsonEquipment.id === "undefined") {
