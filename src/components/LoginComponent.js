@@ -32,7 +32,7 @@ export default LoginComponent = ({ navigation }) => {
         <Text>Eletrônica Delta</Text>
         <Text>Fernandes Bastos 1978</Text>
         <Text>Telefone: (51)98204-0011</Text>
-        <Image source={require("../img/Delta_rotate_txt.png")} />
+        <Image source={require("../img/delta_rotate_txt.png")} />
         <StatusBar style="auto" />
         <View style={styles.inputView}>
           <TextInput
