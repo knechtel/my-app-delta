@@ -25,7 +25,11 @@ class ClientList extends Component {
   };
   redirectToEdit = id => {
     const {navigation} = this.props;
-    navigation.navigate('FormEquipment', {paramKey: id});
+    navigation.navigate("FormEquipment", {
+      paramKey: id,
+      access_token: this.props.route.params.access_token,
+    });
+    
   };
   _onRefresh = () => {
     this.setState({refreshing: true});

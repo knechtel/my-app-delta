@@ -48,7 +48,9 @@ class FiltroComponent extends Component {
   };
   listClient = () => {
     const { navigation } = this.props;
-    navigation.navigate("ClientList");
+    navigation.navigate("ClientList", {
+      access_token: this.props.route.params.access_token,
+    });
   };
   doNewClient = async () => {
     const { navigation } = this.props;

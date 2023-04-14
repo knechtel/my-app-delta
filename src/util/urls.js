@@ -1,6 +1,6 @@
 export const PADRAO = "http://1da5-177-74-122-85.ngrok.io";
-export const LOCAL = "http://10.0.0.199:5000";
-var BASE = "http://e6f7-177-74-122-85.ngrok.io";
+export const LOCAL = "http://10.0.0.200:5000";
+var BASE = LOCAL;
 export var CREATE_CLIENT = BASE + "/api/client-findAll";
 export var SAVE_IMAGE = BASE + "/api/saveImage";
 export var FIND_BY_ID_CLIENT = BASE + `/api/client-findById`;
@@ -24,3 +24,4 @@ export var EQUIPMENT_FIND_DATA_ENTREGA =
   BASE + "/api/equipment-findByDataEntrega";
 export var PHOTO_SERVIDOR = BASE + "/print/download";
 export var FIND_BY_NAME_CLIENT = BASE + "/api/findClientByName";
+export var LOGIN = BASE + "/login";

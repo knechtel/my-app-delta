@@ -59,13 +59,15 @@ async function createNewEquipment(
   });
 }
 
-async function updateCliente(id, name, email, cpf, telefone, endereco) {
+async function updateClient(id, name, email, cpf, telefone, endereco, token) {
+  console.log("ver aqui se chama alguma coisa...  " + token);
   var idClient;
   await axios({
-    method: 'post',
+    method: "post",
     url: UPDATE_CLIENT,
     headers: {
-      'Content-type': 'application/json',
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     data: {
       id: id,
@@ -75,11 +77,12 @@ async function updateCliente(id, name, email, cpf, telefone, endereco) {
       telefone: telefone,
       endereco: endereco,
     },
-  }).then(response => {
+  }).then((response) => {
     idClient = response.data.id;
     console.log();
   });
-  alert('Formulário editado com sucesso!');
+  console.log("valor de token = " + token);
+  alert("Formulário editado com sucesso!");
   return idClient;
 }
 async function updateEquipment(
@@ -90,13 +93,13 @@ async function updateEquipment(
   entregue,
   equipamento,
   pronto,
-  obs,
+  obs
 ) {
   await axios({
-    method: 'post',
+    method: "post",
     url: UPDATE_EQUIPMENT,
     headers: {
-      'Content-type': 'application/json',
+      "Content-type": "application/json",
     },
     data: {
       id: id,
@@ -105,13 +108,13 @@ async function updateEquipment(
       defect_for_repair: defect_for_repair,
       cost_value: preco,
       model: equipamento,
-      serial: '',
+      serial: "",
       pronto: pronto,
       obs: obs,
     },
-  }).then(response => {
+  }).then((response) => {
     console.log();
   });
 }
 
-export {createNewClient, createNewEquipment, updateCliente, updateEquipment};
+export { createNewClient, createNewEquipment, updateClient, updateEquipment };

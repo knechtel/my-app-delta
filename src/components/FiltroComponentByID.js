@@ -35,7 +35,10 @@ const FiltroComponentByID = ({ route, navigation }) => {
     setActBar(false);
   };
   const callId = () => {
-    navigation.navigate("FormEquipment", { paramKey: id });
+    navigation.navigate("FormEquipment", {
+      paramKey: id,
+      access_token: route.params.access_token,
+    });
   };
   const osId = () => {
     navigation.navigate("FormEquipment", { paramKey: id });

@@ -15,26 +15,22 @@ import axios from "axios";
 import { launchImageLibrary } from "react-native-image-picker";
 import RNFetchBlob from "rn-fetch-blob";
 import {
-  CREATE_CLIENT,
-  CREATE_EQUIPMENT,
   FIND_BY_ID_CLIENT,
   FIND_EQUIPMENT_BY_CLIENT,
   LOAD_IAMAGE,
   SAVE_IMAGE,
-  UPDATE_CLIENT,
   UPLOAD_IAMAGE,
 } from "../util/urls";
 import {
   createNewClient,
   createNewEquipment,
-  updateCliente,
+  updateClient,
   updateEquipment,
 } from "../actions/callApi";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
-import * as Progress from "react-native-progress";
 
-const FormEquipment = ({ route, navigate }) => {
+const FormEquipment = ({ route, navigation }) => {
   const [photo, setPhoto] = React.useState(null);
   const [value, setValue] = React.useState(2310.458);
   console.log(route.params.paramKey);
@@ -48,7 +44,7 @@ const FormEquipment = ({ route, navigate }) => {
   const [obs, setObs] = React.useState();
   const [preco, setPreco] = React.useState();
   const [defect_for_repair, setDefeito] = React.useState();
-  const navigation = useNavigation();
+
   const [equipamento, setEquipamento] = React.useState();
   const [brand, setBrand] = React.useState();
   const [pronto, setPronto] = React.useState(false);
@@ -56,6 +52,7 @@ const FormEquipment = ({ route, navigate }) => {
   const [entregue, setEntregue] = React.useState(false);
   const [uri, setUri] = React.useState();
   const [actBar, setActBar] = React.useState(false);
+  const [token, setToken] = React.useState();
 
   const handleChoosePhoto = async () => {
     launchImageLibrary({ noData: true }, (response) => {
@@ -132,15 +129,21 @@ const FormEquipment = ({ route, navigate }) => {
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async (id) => {
+    console.log("puxa token " + route.params.access_token);
     const response = await fetch(FIND_BY_ID_CLIENT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${route.params.access_token}`,
       },
       body: JSON.stringify({
         id: id,
       }),
     });
+    if (response.status == 401 || response.status == 405) {
+      console.log("status = >", response.status);
+      navigation.navigate("loginComponent");
+    }
 
     const json = await response.json();
 
@@ -156,12 +159,16 @@ const FormEquipment = ({ route, navigate }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${route.params.access_token}`,
         },
         body: JSON.stringify({
           id: id,
         }),
       });
-
+      if (responseT.status == 401 || responseT.status == 405) {
+        console.log("status = >" + response.status);
+        navigation.navigate("loginComponent");
+      }
       const jsonEquipment = await responseT.json();
       console.log("puxa equipamento " + jsonEquipment.id);
       if (typeof jsonEquipment.id === "undefined") {
@@ -187,7 +194,8 @@ const FormEquipment = ({ route, navigate }) => {
   useEffect(() => {
     if (route.params.paramKey != 0 && route.params.paramKey != null)
       findClient(route.params.paramKey);
-  }, [route.params.paramKey]);
+    setToken(route.params.access_token);
+  }, [route.params.paramKey, route.params.access_token]);
 
   const createClient = async () => {
     var idClient = id;
@@ -200,7 +208,16 @@ const FormEquipment = ({ route, navigate }) => {
 
     //if com opcao de edicao
     if (id !== null && id !== 0 && typeof id !== "undefined") {
-      idClient = await updateCliente(id, name, email, cpf, telefone, endereco);
+      console.log("UPDATE client token " + token);
+      idClient = await updateClient(
+        id,
+        name,
+        email,
+        cpf,
+        telefone,
+        endereco,
+        token
+      );
 
       if (idEquipment !== null && idEquipment !== 0) {
         //TODO CRIA EQUIPAMENTO SE NAO TEM
