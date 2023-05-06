@@ -6,12 +6,12 @@ import {
   View,
   Image,
   TextInput,
+  Alert,
   Button,
   TouchableOpacity,
 } from "react-native";
 
 import { login } from "../actions/loginApi";
-
 
 export default LoginComponent = ({ navigation }) => {
   const [email, setEmail] = React.useState();
@@ -24,6 +24,7 @@ export default LoginComponent = ({ navigation }) => {
     if (TOKEN != null) {
       navigation.navigate("filtroComponent", { access_token: TOKEN });
     } else {
+      alert("Usuário/Senha inválido!");
     }
   };
   return (
