@@ -38,7 +38,7 @@ class FiltroComponent extends Component {
     navigation.navigate("FiltroComponentDataEntrada", {
       access_token: this.props.route.params.access_token,
     });
-    console.log("ola");
+    console.log("data_entrada token " + this.props.route.params.access_token);
   };
   dataEntrega = () => {
     const { navigation } = this.props;
