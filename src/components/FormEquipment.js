@@ -29,6 +29,7 @@ import {
 } from "../actions/callApi";
 import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
+import * as Progress from "react-native-progress";
 
 const FormEquipment = ({ route, navigation }) => {
   const [photo, setPhoto] = React.useState(null);
@@ -105,7 +106,7 @@ const FormEquipment = ({ route, navigation }) => {
       addAndroidDownloads: {
         useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
         notification: true,
-        path: PictureDir + "os.jpeg", // this is the path where your downloaded file will live in
+        path: PictureDir + "/os.jpeg", // this is the path where your downloaded file will live in
         description: "Downloading image.",
       },
     };

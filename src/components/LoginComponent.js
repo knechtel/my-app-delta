@@ -6,12 +6,12 @@ import {
   View,
   Image,
   TextInput,
+  Alert,
   Button,
   TouchableOpacity,
 } from "react-native";
 
 import { login } from "../actions/loginApi";
-
 
 export default LoginComponent = ({ navigation }) => {
   const [email, setEmail] = React.useState();
@@ -24,6 +24,7 @@ export default LoginComponent = ({ navigation }) => {
     if (TOKEN != null) {
       navigation.navigate("filtroComponent", { access_token: TOKEN });
     } else {
+      alert("Usuário/Senha inválido!");
     }
   };
   return (
@@ -32,7 +33,7 @@ export default LoginComponent = ({ navigation }) => {
         <Text>Eletrônica Delta</Text>
         <Text>Fernandes Bastos 1978</Text>
         <Text>Telefone: (51)98204-0011</Text>
-        <Image source={require("../img/Delta_rotate_txt.png")} />
+        <Image source={require("../img/delta_rotate_txt.png")} />
         <StatusBar style="auto" />
         <View style={styles.inputView}>
           <TextInput
