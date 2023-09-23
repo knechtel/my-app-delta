@@ -43,9 +43,10 @@ class ClientList extends Component {
   };
 
   componentDidMount() {
-    axios.get(FIND_ALL_CLIENT).then(response => {
+    axios.get(FIND_ALL_CLIENT,{ headers: {"Authorization" : `Bearer ${this.props.route.params.access_token}`} }).then(response => {
       this.setState({
         client: response.data,
+        
       });
       console.log(response.data);
     });
