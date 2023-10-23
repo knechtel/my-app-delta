@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import ClientList from "./components/ClientList";
+import ClientListEquipment from "./components/ClientListEquipment";
 import FormEquipment from "./components/FormEquipment";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -84,6 +85,11 @@ const App = () => {
           <Stack.Screen
             name="FiltroComponentDataEntrega"
             component={FiltroComponentDataEntrega}
+            options={{ title: "Eletrônica Delta" }}
+          />
+              <Stack.Screen
+            name="ClientListEquipment"
+            component={ClientListEquipment}
             options={{ title: "Eletrônica Delta" }}
           />
         </Stack.Navigator>

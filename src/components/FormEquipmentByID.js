@@ -17,6 +17,7 @@ import RNFetchBlob from "rn-fetch-blob";
 import {
   FIND_BY_ID_CLIENT,
   FIND_EQUIPMENT_BY_CLIENT,
+  FIND_CLIENT_BY_EQUIPMENT,
   LOAD_IAMAGE,
   SAVE_IMAGE,
   UPLOAD_IAMAGE,
@@ -31,7 +32,7 @@ import { useEffect } from "react";
 import CurrencyInput from "react-native-currency-input";
 import * as Progress from "react-native-progress";
 
-const FormEquipment = ({ route, navigation }) => {
+const FormEquipmentByID = ({ route, navigation }) => {
   const [photo, setPhoto] = React.useState(null);
   const [value, setValue] = React.useState(2310.458);
   console.log(route.params.paramKey);
@@ -138,8 +139,11 @@ const FormEquipment = ({ route, navigation }) => {
     // navigation.navigate('ListEquipment', {paramKey: route.params.paramKey});
   };
   const findClient = async (id) => {
+    console.log("MAIQUEL AQUI KNECHTEL ")
+    console.log("MAIQUEL AQUI KNECHTEL id = "+id)
     console.log("puxa token " + route.params.access_token);
-    const response = await fetch(FIND_BY_ID_CLIENT, {
+
+    const responseT = await fetch(`http://10.0.0.199:5000/api/equipment-to-client`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -149,56 +153,36 @@ const FormEquipment = ({ route, navigation }) => {
         id: id,
       }),
     });
-    if (response.status == 401 || response.status == 405) {
-      console.log("status = >", response.status);
-      navigation.navigate("loginComponent");
+    const json = await responseT.json();
+
+
+    const response = await fetch(`http://10.0.0.199:5000/api/equipment-by-id`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${route.params.access_token}`,
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    const jsonE = await response.json();
+    console.log(json.name)
+    console.log("id = "+id)
+    console.log("MAIS U< MMMM")
+    console.log(jsonE.model)
+    console.log("MAIS U< MMMM    brand")
+    console.log(jsonE.brand)
+    setName(json.name)
+    setCpf(json.cpf)
+    setEquipamento(jsonE.model)
+    setBrand(jsonE.brand)
+    setPreco(jsonE.cost_value)
+    setObs(jsonE.obs);
+    setDefeito(jsonE.defect_for_repair)
+    setObs(jsonE.obs)
     }
-
-    const json = await response.json();
-
-    if (json.id !== null && json.id !== 0) {
-      setName(json.name);
-      setEmail(json.email);
-      setCpf(json.cpf);
-      setId(json.id);
-      setTelefone(json.telefone);
-      setEndereco(json.endereco);
-
-      const responseT = await fetch(FIND_EQUIPMENT_BY_CLIENT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${route.params.access_token}`,
-        },
-        body: JSON.stringify({
-          id: id,
-        }),
-      });
-      if (responseT.status == 401 || responseT.status == 405) {
-        console.log("status = >" + response.status);
-        navigation.navigate("loginComponent");
-      }
-      const jsonEquipment = await responseT.json();
-      console.log("puxa equipamento " + jsonEquipment.id);
-      if (typeof jsonEquipment.id === "undefined") {
-        console.log("NULLL");
-      } else {
-        console.log("NAO NULLL");
-        setIdEquipment(jsonEquipment.id);
-        setBrand(jsonEquipment.brand);
-        setDefeito(jsonEquipment.defect_for_repair);
-        setEquipamento(jsonEquipment.model);
-        setPronto(jsonEquipment.pronto);
-        setEntregue(jsonEquipment.entregue);
-        setObs(jsonEquipment.obs);
-        var valor = jsonEquipment.cost_value;
-        console.log("---->= aparelho " + jsonEquipment.entregue);
-        console.log(jsonEquipment.cost_value);
-        console.log("VALOR ANALIZAR = " + valor);
-        setPreco(Number(valor));
-      }
-    }
-  };
+  
 
   useEffect(() => {
     if (route.params.paramKey != 0 && route.params.paramKey != null)
@@ -347,30 +331,7 @@ const FormEquipment = ({ route, navigation }) => {
           onChangeText={(name) => setName(name)}
           defaultValue={name}
         />
-        <TextInput
-          editable={!entregue}
-          style={styles.input}
-          value={telefone}
-          placeholder="     Telefone"
-          onChangeText={(telefone) => setTelefone(telefone)}
-          defaultValue={telefone}
-        />
-        <TextInput
-          editable={!entregue}
-          style={styles.input}
-          value={endereco}
-          placeholder="     Endereço"
-          onChangeText={(endereco) => setEndereco(endereco)}
-          defaultValue={endereco}
-        />
-        <TextInput
-          editable={!entregue}
-          style={styles.input}
-          value={email}
-          placeholder="     Email"
-          onChangeText={(email) => setEmail(email)}
-          defaultValue={email}
-        />
+
         <TextInput
           editable={!entregue}
           style={styles.input}
@@ -527,4 +488,4 @@ const styles = StyleSheet.create({
     font: 24,
   },
 });
-export default FormEquipment;
+export default FormEquipmentByID;

@@ -10,6 +10,7 @@ export var SAVE_IMAGE = BASE + "/api/saveImage";
 export var FIND_BY_ID_CLIENT = BASE + `/api/client-findById`;
 export var FIND_ALL_EQUIPMENT_BY_CLIENT =
   BASE + `/api/client-findByAllEquipment`;
+export var FIND_CLIENT_BY_EQUIPMENT =  BASE+'/api/equipment-to-client'
 export var FIND_EQUIPMENT_BY_CLIENT = BASE + `/api/equipmentByIdClient`;
 export var FIND_BY_ID_EQUIPMENT = BASE + `/equipment-findById`;
 export var CREATE_EQUIPMENT = BASE + `/api/equipment`;

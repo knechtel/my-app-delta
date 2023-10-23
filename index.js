@@ -1,4 +1,4 @@
-import { registerRootComponent } from 'expo';
+import { registerRootComponent } from "expo";
 import React from "react";
 
 import { StyleSheet, Text, View } from "react-native";
@@ -8,7 +8,7 @@ import FormEquipment from "./src/components/FormEquipment";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ListEquipment from "./src/components/ListEquipment";
-
+import ClientListEquipment from "./src/components/ClientListEquipment";
 import FiltroComponent from "./src/components/FiltroComponent";
 import FiltroComponentByID from "./src/components/FiltroComponentByID";
 import FiltroComponentByName from "./src/components/FiltroComponentByName";
@@ -18,6 +18,7 @@ import ClientListByDataEntrega from "./src/components/ClientListByDataEntrega";
 import FiltroComponentDataEntrega from "./src/components/FiltroComponentDataEntrega";
 import ClientListByName from "./src/components/ClientListByName";
 import LoginComponent from "./src/components/LoginComponent";
+import FormEquipmentByID from "./src/components/FormEquipmentByID";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -59,6 +60,11 @@ const App = () => {
             component={FormEquipment}
             options={{ title: "Cadastrar Equipamento" }}
           />
+                <Stack.Screen
+            name="FormEquipmentByID"
+            component={FormEquipmentByID}
+            options={{ title: "Cadastrar Equipamento" }}
+          />
           <Stack.Screen
             name="ListEquipment"
             component={ListEquipment}
@@ -92,6 +98,12 @@ const App = () => {
           <Stack.Screen
             name="FiltroComponentDataEntrega"
             component={FiltroComponentDataEntrega}
+            options={{ title: "Eletrônica Delta" }}
+          />
+
+          <Stack.Screen
+            name="ClientListEquipment"
+            component={ClientListEquipment}
             options={{ title: "Eletrônica Delta" }}
           />
         </Stack.Navigator>
