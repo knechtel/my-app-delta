@@ -37,9 +37,10 @@ class ClientList extends Component {
       this.setState({
         client: response.data,
       });
-      this.setState({refreshing: false});
+    
       console.log(response.data);
     });
+    this.setState({refreshing: false});
   };
 
   componentDidMount() {
