@@ -142,7 +142,7 @@ const FormEquipmentByID = ({ route, navigation }) => {
     console.log("MAIQUEL AQUI KNECHTEL ")
     console.log("MAIQUEL AQUI KNECHTEL id = "+id)
     console.log("puxa token " + route.params.access_token);
-
+    setIdEquipment(id);
     const responseT = await fetch(`http://10.0.0.199:5000/api/equipment-to-client`, {
       method: "POST",
       headers: {
@@ -187,35 +187,35 @@ const FormEquipmentByID = ({ route, navigation }) => {
   useEffect(() => {
     if (route.params.paramKey != 0 && route.params.paramKey != null)
       findClient(route.params.paramKey);
+    
     setToken(route.params.access_token);
   }, [route.params.paramKey, route.params.access_token]);
 
 
 
   const createClient = async () => {
+
+   
     var idClient = id;
     var aparelhoEntregue = null;
-    if (entregue == true) {
-      const d = new Date();
-      d.getTime();
-      aparelhoEntregue = d.toISOString().substring(0, 10);
-    }
+ 
 
     //if com opcao de edicao
     if (id !== null && id !== 0 && typeof id !== "undefined") {
       console.log("UPDATE client token " + token);
-      idClient = await updateClient(
-        id,
-        name,
-        email,
-        cpf,
-        telefone,
-        endereco,
-        token
-      );
+      // idClient = await updateClient(
+      //   id,
+      //   name,
+      //   email,
+      //   cpf,
+      //   telefone,
+      //   endereco,
+      //   token
+      // );
 
       if (idEquipment !== null && idEquipment !== 0) {
         //TODO CRIA EQUIPAMENTO SE NAO TEM
+        console.log("updateEquipamento")
         await updateEquipment(
           idEquipment,
           brand,
@@ -269,43 +269,25 @@ const FormEquipmentByID = ({ route, navigation }) => {
         } else {
           console.log("doTheCall");
           console.log("telefone =>" + telefone);
-          idClient = await createNewClient(
-            name,
-            email,
-            cpf,
-            telefone,
-            endereco,
-            route.params.access_token
+          await updateEquipment(
+            idEquipment,
+            brand,
+            defect_for_repair,
+            preco,
+            entregue,
+            equipamento,
+            pronto,
+            obs
           );
+      
 
           if (typeof defect_for_repair === "undefined") {
             setDefeito("defeito nao definido");
           }
           if (typeof cost_value === "undefined") {
           }
-          await createNewEquipment(
-            idClient,
-            brand,
-            entregue,
-            defect_for_repair,
-            preco,
-            aparelhoEntregue,
-            equipamento,
-            obs
-          );
-          setName("");
-          setEmail("");
-          setBrand("");
-          setCpf("");
-          setTelefone("");
-          setPreco(0.0);
-          setDefeito("");
-          setEquipamento("");
-          setEndereco("");
-          setObs("");
-          setEntregue(false);
-          setPronto(false);
-          alert("Cadastro realizado com sucesso!");
+       
+        alert("Edição realizada com sucesso!");
         }
       } else {
         alert("Erro nos dados de entrada!");
