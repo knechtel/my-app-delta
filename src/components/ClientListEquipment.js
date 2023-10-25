@@ -37,7 +37,7 @@ class ClientListEquipment extends Component {
     this.setState({refreshing: true});
     axios.post(FIND_EQUIPMENT_BY_CLIENT,{
       headers: {"Authorization" : `Bearer ${this.props.route.params.access_token}`} },
-      {"id":id}).then(response => {
+      {"id":this.props.route.params.paramKey}).then(response => {
       this.setState({
         equipment: response.data,
       });
