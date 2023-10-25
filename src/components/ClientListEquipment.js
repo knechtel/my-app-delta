@@ -33,20 +33,16 @@ class ClientListEquipment extends Component {
     
   };
   _onRefresh = () => {
-    console.log("maiquel mais um teste ")
-    console.log(this.props.route.params.access_token)
-    console.log("=========================")
+
     this.setState({refreshing: true});
     axios.post(FIND_EQUIPMENT_BY_CLIENT,{
       headers: {"Authorization" : `Bearer ${this.props.route.params.access_token}`} },
       {"id":id}).then(response => {
-      
       this.setState({
         equipment: response.data,
       });
-      this.setState({refreshing: false});
-      console.log(response.data);
     });
+    this.setState({refreshing: false});
   };
 
    componentDidMount() {
