@@ -23,8 +23,6 @@ import {
   UPLOAD_IAMAGE,
 } from "../util/urls";
 import {
-  createNewClient,
-  createNewEquipment,
   updateClient,
   updateEquipment,
 } from "../actions/callApi";
