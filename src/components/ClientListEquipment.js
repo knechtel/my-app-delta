@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
-import {FIND_ALL_CLIENT, FIND_EQUIPMENT_BY_CLIENT} from '../util/urls';
+import { FIND_EQUIPMENT_BY_CLIENT} from '../util/urls';
 
 class ClientListEquipment extends Component {
   constructor(props) {
@@ -46,8 +46,6 @@ class ClientListEquipment extends Component {
   };
 
    componentDidMount() {
-
-    console.log("Minha tela mais id = "+this.props.route.params.paramKey);
     axios.post(FIND_EQUIPMENT_BY_CLIENT,{ 
      "id":this.props.route.params.paramKey},{
       headers: {"Authorization" : `Bearer ${this.props.route.params.access_token}`},
